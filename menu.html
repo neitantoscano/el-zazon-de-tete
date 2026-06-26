@@ -1,296 +1,453 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html class="dark" lang="es-MX">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menú · El Sazón de Tete · Cuernavaca</title>
-<meta name="description" content="Carta completa de El Sazón de Tete: desayunos, cafés de especialidad, bebidas, waffles y postres.">
-<link rel="stylesheet" href="styles.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menú | El Sazón de Tete</title>
+<meta name="description" content="Carta completa de El Sazón de Tete: desayunos, comida de casa, cafés de especialidad, bebidas y más de 20 postres."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&amp;family=Source+Serif+4:opsz,wght@8..60,300;400;500;600;700&amp;family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: {
+      colors: {
+        "surface-container-high": "#322820",
+        "surface-dim": "#1a120b",
+        "surface-container-highest": "#3d332b",
+        "background": "#1a120b",
+        "secondary": "#dec1b3",
+        "surface-bright": "#42372f",
+        "surface-container": "#271e16",
+        "surface-variant": "#3d332b",
+        "outline": "#99907c",
+        "tertiary": "#dfccae",
+        "on-background": "#f1dfd3",
+        "on-surface-variant": "#d0c5af",
+        "surface-container-low": "#221a13",
+        "primary-container": "#d4af37",
+        "on-primary": "#3c2f00",
+        "on-surface": "#f1dfd3",
+        "primary": "#f2ca50",
+        "surface": "#1a120b",
+        "surface-container-lowest": "#140d06",
+        "gold-deep": "#e9c349"
+      },
+      borderRadius: { DEFAULT:"0.125rem", lg:"0.25rem", xl:"0.5rem", full:"0.75rem" },
+      spacing: { "gutter":"24px","container-max":"1280px","margin-mobile":"16px","margin-desktop":"64px" },
+      fontFamily: {
+        "display-lg": ["EB Garamond"],
+        "body-md": ['"Source Serif 4"'],
+        "headline-lg": ["EB Garamond"],
+        "body-lg": ['"Source Serif 4"'],
+        "label-md": ["Work Sans"]
+      },
+      fontSize: {
+        "display-lg": ["48px", {lineHeight:"1.1", letterSpacing:"-0.02em", fontWeight:"600"}],
+        "body-md": ["16px", {lineHeight:"1.6", fontWeight:"400"}],
+        "headline-lg": ["32px", {lineHeight:"1.2", fontWeight:"500"}],
+        "body-lg": ["18px", {lineHeight:"1.6", fontWeight:"400"}],
+        "label-md": ["14px", {lineHeight:"1.4", letterSpacing:"0.05em", fontWeight:"500"}]
+      }
+    }}
+  }
+</script>
 <style>
-.menu-hero{
-  background:linear-gradient(160deg,var(--green-700),var(--green-900));
-  color:var(--cream);text-align:center;padding:4rem 0 3.4rem;position:relative;overflow:hidden;
-}
-.menu-hero .script{color:var(--gold);font-size:clamp(2.2rem,6vw,3.4rem)}
-.menu-hero h1{font-size:clamp(1.3rem,3vw,1.9rem);font-weight:600;font-style:italic;margin-top:.3rem}
-.menu-hero p{opacity:.9;margin-top:.8rem}
-.menu-hero .wa-btn{margin-top:1.6rem}
-
-/* Aviso de verificación */
-.notice{
-  background:#FFF6E6;border:1px solid #F2D79B;color:#6b551f;
-  border-radius:14px;padding:1rem 1.2rem;margin:2.2rem auto 0;
-  width:min(900px,92vw);font-size:.92rem;display:flex;gap:.7rem;align-items:flex-start;
-}
-.notice svg{flex:none;width:20px;height:20px;color:var(--gold);margin-top:2px}
-
-/* Navegación de categorías */
-.catnav{position:sticky;top:60px;z-index:30;background:var(--cream);
-  border-bottom:1px solid var(--cream-2);padding:.7rem 0}
-.catnav .wrap{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.2rem}
-.catnav a{white-space:nowrap;font-weight:700;font-size:.85rem;color:var(--green-700);
-  background:#fff;border:1px solid var(--cream-2);padding:.45rem .9rem;border-radius:999px}
-.catnav a:hover{background:var(--green-700);color:var(--cream)}
-
-.menu-wrap{width:min(960px,92vw);margin:3rem auto 4rem}
-.cat{margin-bottom:3.2rem;scroll-margin-top:120px}
-.cat-title{display:flex;align-items:center;gap:1rem;margin-bottom:1.4rem}
-.cat-title h2{font-size:clamp(1.6rem,4vw,2.2rem);color:var(--green-900)}
-.cat-title::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
-.cat-note{font-size:.85rem;color:var(--clay);font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:1rem}
-
-.items{display:grid;gap:.2rem}
-.item{display:grid;grid-template-columns:1fr auto;gap:.4rem 1rem;
-  padding:.9rem 0;border-bottom:1px dashed var(--cream-2);align-items:baseline}
-.item .name{font-family:'Fraunces',serif;font-weight:600;color:var(--ink);font-size:1.08rem}
-.item .desc{grid-column:1/-1;color:#6a6657;font-size:.92rem;margin-top:-.2rem}
-.item .price{font-family:'Fraunces',serif;font-weight:700;color:var(--gold);font-size:1.1rem;white-space:nowrap}
-.q{color:var(--clay);font-weight:700;font-size:.8em}
-
-/* tarjeta CTA dentro del menú */
-.menu-cta{background:#fff;border:1px solid var(--cream-2);border-radius:18px;
-  padding:2rem;text-align:center;box-shadow:0 10px 30px rgba(22,48,31,.06);margin:3.5rem auto 0}
-.menu-cta h3{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--green-900)}
-.menu-cta p{color:#5a5648;margin:.5rem 0 1.2rem}
-
-/* dos columnas en pantallas amplias para categorías cortas */
-@media(min-width:780px){
-  .cols2{column-count:2;column-gap:3rem}
-  .cols2 .item{break-inside:avoid}
-}
+  body{
+    background-color:#1a120b;
+    background-image:url("https://www.transparenttextures.com/patterns/dark-matter.png");
+    color:#f1dfd3;
+  }
+  .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;}
+  .plaque-border{border:1px solid #e9c349;padding:2px;position:relative;}
+  .plaque-inner{border:1px solid #e9c349;}
+  .gold-separator{height:1px;background:linear-gradient(to right,transparent,#e9c349,transparent);}
+  .scroll-reveal{opacity:0;transform:translateY(20px);transition:all .8s ease-out;}
+  .scroll-reveal.active{opacity:1;transform:translateY(0);}
+  /* Cuadrito de cada platillo */
+  .dish{
+    border:1px solid #3d332b;background:#221a13;
+    padding:1.5rem;display:flex;flex-direction:column;
+    transition:border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+  }
+  .dish:hover{border-color:#f2ca50;transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.35);}
+  .q{color:#e9c349;font-weight:700;font-size:.8em;}
+  @media (prefers-reduced-motion: reduce){
+    .scroll-reveal{opacity:1 !important;transform:none !important;transition:none;}
+    .dish:hover{transform:none;}
+  }
 </style>
 </head>
-<body>
+<body class="font-body-md overflow-x-hidden">
 
 <!-- NAV -->
-<nav class="nav">
-  <div class="wrap">
-    <a href="index.html" class="brand">El Sazón de Tete</a>
-    <div class="nav-links">
-      <a href="index.html">Inicio</a>
-      <a href="#comida">Cocina</a>
-      <a href="#postres">Postres</a>
-      <a href="#cafe">Café</a>
-      <a class="wa-btn" href="https://wa.me/527773701417?text=%C2%A1Hola%20El%20Saz%C3%B3n%20de%20Tete!%20Quiero%20pedir%20del%20men%C3%BA." target="_blank" rel="noopener">
-        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
-        Pedir
-      </a>
+<header class="bg-surface fixed top-0 left-0 right-0 z-50 border-b border-surface-container-highest transition-all duration-300">
+  <nav class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto w-full">
+    <a href="index.html" class="font-display-lg text-2xl md:text-3xl text-primary tracking-tight">El Sazón de Tete</a>
+    <div class="hidden md:flex items-center space-x-8">
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md uppercase" href="index.html">Inicio</a>
+      <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md uppercase" href="menu.html">Menú</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md uppercase" href="index.html#nosotros">Nosotros</a>
+      <a class="text-on-surface-variant font-medium hover:text-primary transition-colors font-label-md uppercase" href="index.html#contacto">Contacto</a>
     </div>
-  </div>
-</nav>
-
-<!-- HERO MENÚ -->
-<header class="menu-hero">
-  <div class="wrap">
-    <div class="script">Nuestra carta</div>
-    <h1>Desayunos, café de especialidad, bebidas y postres</h1>
-    <a class="wa-btn" href="https://wa.me/527773701417?text=%C2%A1Hola!%20Quiero%20pedir%20del%20men%C3%BA%3A%20" target="_blank" rel="noopener">
-      <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
-      Pedir por WhatsApp
+    <a href="https://wa.me/527773701417?text=%C2%A1Hola%20El%20Saz%C3%B3n%20de%20Tete!%20Quiero%20pedir%20del%20men%C3%BA." target="_blank" rel="noopener"
+       class="inline-flex items-center gap-2 bg-primary text-on-primary px-4 md:px-6 py-2 rounded-DEFAULT font-label-md uppercase tracking-widest cursor-pointer transition-transform duration-200 active:scale-95 hover:bg-primary-container">
+      <svg viewBox="0 0 32 32" class="w-4 h-4" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
+      <span class="hidden sm:inline">WhatsApp</span>
     </a>
-    <div class="notice">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
-      <span>Algunos precios se transcribieron de fotos del menú y pueden no estar al día. Los marcados con <span class="q">(?)</span> no se leían con claridad. Confirma precios y disponibilidad por WhatsApp antes de pedir.</span>
-    </div>
-  </div>
+  </nav>
 </header>
 
-<!-- NAV CATEGORÍAS -->
-<div class="catnav">
-  <div class="wrap">
-    <a href="#comida">Algo diferente y dulce</a>
-    <a href="#cuerna">Cuerna mi amor</a>
-    <a href="#especiales">Especiales</a>
-    <a href="#postres">Postres</a>
-    <a href="#cafe">Cafés</a>
-    <a href="#bebidas">Bebidas</a>
-  </div>
-</div>
+<main class="pt-24">
 
-<main class="menu-wrap">
-
-  <!-- ALGO DIFERENTE Y DULCE -->
-  <section class="cat" id="comida">
-    <div class="cat-title"><h2>Algo diferente y dulce</h2></div>
-    <div class="items">
-      <div class="item"><div class="name">Eggy Waffle</div><div class="price">$229</div><div class="desc">Relleno de pechuga de pavo, queso manchego, espinacas, con un huevo estrellado, tocino y mermelada casera.</div></div>
-      <div class="item"><div class="name">Omelette Waffle</div><div class="price">$229</div><div class="desc">Relleno con queso manchego y espinacas, acompañado de aguacate, tocino y mermelada casera.</div></div>
-      <div class="item"><div class="name">Hot Cakes Mademoiselle</div><div class="price">$189</div><div class="desc">Elige tu topping favorito: nutella, lechera, chocolate ó miel de maple.</div></div>
-      <div class="item"><div class="name">Hot Cakes Clásicos</div><div class="price">$169</div><div class="desc">3 piezas esponjositas con mantequilla y miel de maple.</div></div>
-      <div class="item"><div class="name">Banana y Berry Toast</div><div class="price">$149</div><div class="desc">Pan artesanal, crema de cacahuate, plátano y fresa.</div></div>
-      <div class="item"><div class="name">Chapata Artesanal</div><div class="price">$189</div><div class="desc">Chapata de milanesa o cochinita pibil, acompañada de ensalada o papitas.</div></div>
-      <div class="item"><div class="name">Croissant de Jamón y Queso</div><div class="price">$139</div><div class="desc">Croissant artesanal relleno de pechuga de pavo y manchego, acompañado de papitas saladas.</div></div>
-      <div class="item"><div class="name">French Toast</div><div class="price">$189</div><div class="desc">Receta de la casa con miel y fruta.</div></div>
-      <div class="item"><div class="name">Tablita Especial</div><div class="price">$599</div><div class="desc">3 omelettes con tocino, 2 pancakes, 1 panqué de elote con helado, 2 bowls de chilaquiles rojos ó verdes, 1 bowl de frutas de temporada, 2 jugos de naranja pequeños, toppings de nutella y mermelada.</div></div>
+  <!-- TÍTULO MENÚ -->
+  <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-16 text-center">
+    <p class="font-label-md text-primary tracking-[0.2em] mb-4 uppercase">La carta completa</p>
+    <h1 class="font-display-lg text-display-lg text-on-surface mb-6 italic">Nuestro Menú</h1>
+    <div class="plaque-border p-1 max-w-3xl mx-auto">
+      <div class="plaque-inner bg-surface-container-low py-5 px-6 flex items-start gap-3 text-left">
+        <span class="material-symbols-outlined text-primary mt-0.5">info</span>
+        <p class="font-body-md text-on-surface-variant">Algunos precios se transcribieron de fotos del menú y pueden no estar al día. Los marcados con <span class="q">(?)</span> no se leían con claridad. Confirma precios y disponibilidad por WhatsApp antes de pedir.</p>
+      </div>
     </div>
   </section>
 
-  <!-- CUERNA MI AMOR -->
-  <section class="cat" id="cuerna">
-    <div class="cat-title"><h2>Cuerna mi amor</h2></div>
-    <div class="items">
-      <div class="item"><div class="name">Cecina de Yecapixtla</div><div class="price">$249</div><div class="desc">Con arroz, papas a la francesa, guacamole, queso fresco, frijolitos y nopalitos.</div></div>
-      <div class="item"><div class="name">Acorazados Teté</div><div class="price">$179</div><div class="desc">Orden de tres ricos taquitos con arroz y salsa. Elige tu guisado: milanesa ó cochinita pibil (1 guisado por orden).</div></div>
-      <div class="item"><div class="name">Panchito's Breakfast</div><div class="price">$249</div><div class="desc">2 huevos estrellados o revueltos, chilaquiles verdes ó rojos acompañados de pan francés.</div></div>
-      <div class="item"><div class="name">Tacos Campechanos</div><div class="price">$199</div><div class="desc">Orden de 5 taquitos con chorizo, cecina y salsita casera.</div></div>
-      <div class="item"><div class="name">Huevos Aporreados</div><div class="price">$199</div><div class="desc">¡Deliciosos huevos aporreados!</div></div>
-      <div class="item"><div class="name">Huevos Don Chaguito</div><div class="price">$179</div><div class="desc">Huevos estrellados con queso y jamón en salsa roja con un toque de chorizo.</div></div>
-      <div class="item"><div class="name">Huevos Benedictinos</div><div class="price">$229</div><div class="desc">2 huevitos pochados bañados en salsa holandesa, acompañados de jamón serrano.</div></div>
-      <div class="item"><div class="name">Queso Panela</div><div class="price">$199</div><div class="desc">Queso panela en salsa con tortillas a mano y frijolitos.</div></div>
-      <div class="item"><div class="name">Adu's Breakfast</div><div class="price">$239</div><div class="desc">Huevos revueltos, tocino crujiente, pan francés dorado y fruta fresca.</div></div>
+  <!-- NAV DE CATEGORÍAS -->
+  <div class="sticky top-[72px] z-30 bg-surface/95 backdrop-blur border-y border-surface-container-highest mb-16">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-3 flex gap-3 overflow-x-auto">
+      <a href="#desayunos" class="whitespace-nowrap font-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary border border-surface-container-highest hover:border-primary px-4 py-1.5 transition-colors">Desayunos &amp; Waffles</a>
+      <a href="#cuerna" class="whitespace-nowrap font-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary border border-surface-container-highest hover:border-primary px-4 py-1.5 transition-colors">Cuerna mi amor</a>
+      <a href="#postres" class="whitespace-nowrap font-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary border border-surface-container-highest hover:border-primary px-4 py-1.5 transition-colors">Postres</a>
+      <a href="#cafes" class="whitespace-nowrap font-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary border border-surface-container-highest hover:border-primary px-4 py-1.5 transition-colors">Cafés</a>
+      <a href="#bebidas" class="whitespace-nowrap font-label-md uppercase tracking-widest text-on-surface-variant hover:text-primary border border-surface-container-highest hover:border-primary px-4 py-1.5 transition-colors">Bebidas</a>
     </div>
-  </section>
-
-  <!-- POSTRES -->
-  <section class="cat" id="postres">
-    <div class="cat-title"><h2>Postres</h2></div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Waffle Especial</div><div class="price">$179</div><div class="desc">+$25 helado vainilla / chocolate / cookies &amp; cream · +$20 chantilly.</div></div>
-      <div class="item"><div class="name">Cuernito de Mantequilla</div><div class="price">$79</div><div class="desc">Con nutella y fruta.</div></div>
-      <div class="item"><div class="name">Concha de Nata c/ Conejito Turín</div><div class="price">$119</div></div>
-      <div class="item"><div class="name">Crepa Cheesy Nutella</div><div class="price">$119</div><div class="desc">Rellena de queso philadelphia, con nutella y fruta. Agrega una bola de helado +$15.</div></div>
-      <div class="item"><div class="name">Lotus Ice Cream Cake</div><div class="price">$159</div></div>
-      <div class="item"><div class="name">Cheesecake</div><div class="price">$159</div></div>
-      <div class="item"><div class="name">Ice Cream Chocolate Brownie</div><div class="price">$159</div></div>
-      <div class="item"><div class="name">Pastel de Zanahoria</div><div class="price">$129</div></div>
-      <div class="item"><div class="name">Flan de Queso y Cajeta</div><div class="price">$129</div></div>
-      <div class="item"><div class="name">Panqué de Elote c/ Helado</div><div class="price">$119</div></div>
-      <div class="item"><div class="name">Rol Original</div><div class="price">$84</div></div>
-      <div class="item"><div class="name">Rol Frutos Rojos</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Rol Lotus</div><div class="price">$99</div></div>
-    </div>
-  </section>
-
-  <!-- CTA intermedio -->
-  <div class="menu-cta">
-    <h3>¿Se te antojó algo?</h3>
-    <p>Mándanos tu pedido por WhatsApp y lo preparamos.</p>
-    <a class="wa-btn" style="margin-inline:auto" href="https://wa.me/527773701417?text=%C2%A1Hola!%20Quiero%20pedir%3A%20" target="_blank" rel="noopener">
-      <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
-      Pedir por WhatsApp
-    </a>
   </div>
 
-  <!-- CAFÉS -->
-  <section class="cat" id="cafe" style="margin-top:3.2rem">
-    <div class="cat-title"><h2>Cafés</h2></div>
-
-    <div class="cat-note">Cafés esenciales</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Espresso</div><div class="price">$59</div></div>
-      <div class="item"><div class="name">Espresso Cortado</div><div class="price">$69</div></div>
-      <div class="item"><div class="name">Espresso Doble</div><div class="price">$69</div></div>
-      <div class="item"><div class="name">Americano</div><div class="price">$69</div></div>
-      <div class="item"><div class="name">Flat White</div><div class="price">$79</div></div>
-      <div class="item"><div class="name">Capuccino</div><div class="price">$79</div></div>
-      <div class="item"><div class="name">Latte</div><div class="price">$79</div></div>
-      <div class="item"><div class="name">Americano Cortado</div><div class="price">$79</div></div>
-      <div class="item"><div class="name">Café de Olla</div><div class="price">$49</div></div>
+  <!-- ===== DESAYUNOS & WAFFLES ===== -->
+  <section id="desayunos" class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 scroll-mt-40">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h2 class="font-headline-lg text-primary mb-2">Algo diferente y dulce</h2>
+        <p class="font-label-md text-on-surface-variant uppercase tracking-widest">Desayunos &amp; waffles</p>
+      </div>
+      <div class="gold-separator flex-grow mx-8 mb-4"></div>
+      <span class="material-symbols-outlined text-primary">brunch_dining</span>
     </div>
-
-    <div class="cat-note" style="margin-top:1.8rem">Cafés especializados</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Red Velvet</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Caramel Machiato</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Latte Vainilla</div><div class="price">$89</div></div>
-      <div class="item"><div class="name">Pumpkin Latte</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Affogato</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Café Bombón</div><div class="price">$79</div></div>
-      <div class="item"><div class="name">Capuccino de Lavanda</div><div class="price">$99</div></div>
-    </div>
-
-    <div class="cat-note" style="margin-top:1.8rem">Sabores únicos</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Moccha</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Chai</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Chai Latte</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Matcha Latte</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Taro Latte</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Golden Milk</div><div class="price">$89</div></div>
-      <div class="item"><div class="name">Pink Latte</div><div class="price">$89</div></div>
-      <div class="item"><div class="name">Horchata Café</div><div class="price">$99</div></div>
-    </div>
-
-    <div class="cat-note" style="margin-top:1.8rem">Opciones frías</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Rick's Cold Brew</div><div class="price">$89</div></div>
-      <div class="item"><div class="name">Chocolate Frío o Caliente</div><div class="price">$89</div></div>
-      <div class="item"><div class="name">Mocha Frío</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Matcha Frío</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Frappuccino</div><div class="price">$89</div><div class="desc">Oreo / Taro / Pumpkin / Red velvet.</div></div>
-      <div class="item"><div class="name">Frapé de Lichy con Lavanda</div><div class="price">$129</div></div>
-    </div>
-
-    <div class="cat-note" style="margin-top:1.8rem">Extras</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Leche de almendras y soya</div><div class="price">$25</div></div>
-      <div class="item"><div class="name">Shot de leche entera ó deslactosada</div><div class="price">$25</div></div>
-      <div class="item"><div class="name">Shot de leche de almendras</div><div class="price">$55</div></div>
-      <div class="item"><div class="name">Taza de leche entera ó deslactosada</div><div class="price">$45</div></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Eggy Waffle</h3><span class="font-label-md text-primary text-lg">$229</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Relleno de pechuga de pavo, queso manchego y espinacas, con huevo estrellado, tocino y mermelada casera.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Omelette Waffle</h3><span class="font-label-md text-primary text-lg">$229</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Relleno con queso manchego y espinacas, acompañado de aguacate, tocino y mermelada casera.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Hot Cakes Mademoiselle</h3><span class="font-label-md text-primary text-lg">$189</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Elige tu topping favorito: nutella, lechera, chocolate ó miel de maple.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Hot Cakes Clásicos</h3><span class="font-label-md text-primary text-lg">$169</span></div>
+        <p class="font-body-md text-on-surface-variant italic">3 piezas esponjositas con mantequilla y miel de maple.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Banana y Berry Toast</h3><span class="font-label-md text-primary text-lg">$149</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Pan artesanal, crema de cacahuate, plátano y fresa.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Chapata Artesanal</h3><span class="font-label-md text-primary text-lg">$189</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Chapata de milanesa o cochinita pibil, acompañada de ensalada o papitas.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Croissant de Jamón y Queso</h3><span class="font-label-md text-primary text-lg">$139</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Croissant artesanal relleno de pechuga de pavo y manchego, con papitas saladas.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">French Toast</h3><span class="font-label-md text-primary text-lg">$189</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Receta de la casa con miel y fruta.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Tablita Especial</h3><span class="font-label-md text-primary text-lg">$599</span></div>
+        <p class="font-body-md text-on-surface-variant italic">3 omelettes con tocino, 2 pancakes, panqué de elote con helado, 2 bowls de chilaquiles, bowl de fruta, 2 jugos de naranja y toppings de nutella y mermelada.</p>
+      </article>
     </div>
   </section>
 
-  <!-- BEBIDAS -->
-  <section class="cat" id="bebidas">
-    <div class="cat-title"><h2>Bebidas</h2></div>
+  <!-- ===== CUERNA MI AMOR ===== -->
+  <section id="cuerna" class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 scroll-mt-40">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h2 class="font-headline-lg text-primary mb-2">Cuerna mi amor</h2>
+        <p class="font-label-md text-on-surface-variant uppercase tracking-widest">Comida de casa &amp; guisos</p>
+      </div>
+      <div class="gold-separator flex-grow mx-8 mb-4"></div>
+      <span class="material-symbols-outlined text-primary">skillet</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Cecina de Yecapixtla</h3><span class="font-label-md text-primary text-lg">$249</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Con arroz, papas a la francesa, guacamole, queso fresco, frijolitos y nopalitos.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Acorazados Teté</h3><span class="font-label-md text-primary text-lg">$179</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Tres taquitos con arroz y salsa. Elige tu guisado: milanesa ó cochinita pibil (1 por orden).</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Panchito's Breakfast</h3><span class="font-label-md text-primary text-lg">$249</span></div>
+        <p class="font-body-md text-on-surface-variant italic">2 huevos estrellados o revueltos, chilaquiles verdes ó rojos acompañados de pan francés.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Tacos Campechanos</h3><span class="font-label-md text-primary text-lg">$199</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Orden de 5 taquitos con chorizo, cecina y salsita casera.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Huevos Aporreados</h3><span class="font-label-md text-primary text-lg">$199</span></div>
+        <p class="font-body-md text-on-surface-variant italic">¡Deliciosos huevos aporreados!</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Huevos Don Chaguito</h3><span class="font-label-md text-primary text-lg">$179</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Huevos estrellados con queso y jamón en salsa roja con un toque de chorizo.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Huevos Benedictinos</h3><span class="font-label-md text-primary text-lg">$229</span></div>
+        <p class="font-body-md text-on-surface-variant italic">2 huevitos pochados bañados en salsa holandesa, acompañados de jamón serrano.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Queso Panela</h3><span class="font-label-md text-primary text-lg">$199</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Queso panela en salsa con tortillas a mano y frijolitos.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Adu's Breakfast</h3><span class="font-label-md text-primary text-lg">$239</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Huevos revueltos, tocino crujiente, pan francés dorado y fruta fresca.</p>
+      </article>
+    </div>
+  </section>
 
-    <div class="cat-note">Malteadas y licuados</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Malteada</div><div class="price">$99 <span class="q">(?)</span></div><div class="desc">De fresa, chocolate, vainilla ó cookies &amp; cream. Agrega topping +$35.</div></div>
-      <div class="item"><div class="name">Malteada Turín</div><div class="price">$129</div></div>
-      <div class="item"><div class="name">Banana Split</div><div class="price">$149</div></div>
-      <div class="item"><div class="name">Taro</div><div class="price">$119</div></div>
-      <div class="item"><div class="name">Licuado de Plátano</div><div class="price">$89</div></div>
-      <div class="item"><div class="name">Licuado de Fresa</div><div class="price">$119</div></div>
-      <div class="item"><div class="name">Smoothie Jais-Ice Berries</div><div class="price">$109</div></div>
+  <!-- ===== POSTRES ===== -->
+  <section id="postres" class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 scroll-mt-40">
+    <div class="flex flex-row-reverse justify-between items-end mb-10">
+      <div class="text-right">
+        <h2 class="font-headline-lg text-primary mb-2">Postres</h2>
+        <p class="font-label-md text-on-surface-variant uppercase tracking-widest">Para cerrar dulce</p>
+      </div>
+      <div class="gold-separator flex-grow mx-8 mb-4"></div>
+      <span class="material-symbols-outlined text-primary">cake</span>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Waffle Especial</h3><span class="font-label-md text-primary text-lg">$179</span></div>
+        <p class="font-body-md text-on-surface-variant italic">+$25 helado vainilla / chocolate / cookies &amp; cream · +$20 chantilly.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Cuernito de Mantequilla</h3><span class="font-label-md text-primary text-lg">$79</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Con nutella y fruta.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Concha de Nata c/ Conejito Turín</h3><span class="font-label-md text-primary text-lg">$119</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Crepa Cheesy Nutella</h3><span class="font-label-md text-primary text-lg">$119</span></div>
+        <p class="font-body-md text-on-surface-variant italic">Rellena de queso philadelphia, con nutella y fruta. Bola de helado +$15.</p>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Lotus Ice Cream Cake</h3><span class="font-label-md text-primary text-lg">$159</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Cheesecake</h3><span class="font-label-md text-primary text-lg">$159</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Ice Cream Chocolate Brownie</h3><span class="font-label-md text-primary text-lg">$159</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Pastel de Zanahoria</h3><span class="font-label-md text-primary text-lg">$129</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Flan de Queso y Cajeta</h3><span class="font-label-md text-primary text-lg">$129</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Panqué de Elote c/ Helado</h3><span class="font-label-md text-primary text-lg">$119</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Rol Original</h3><span class="font-label-md text-primary text-lg">$84</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Rol Frutos Rojos</h3><span class="font-label-md text-primary text-lg">$99</span></div>
+      </article>
+      <article class="dish">
+        <div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Rol Lotus</h3><span class="font-label-md text-primary text-lg">$99</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== CAFÉS ===== -->
+  <section id="cafes" class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 scroll-mt-40">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h2 class="font-headline-lg text-primary mb-2">Cafés</h2>
+        <p class="font-label-md text-on-surface-variant uppercase tracking-widest">De especialidad</p>
+      </div>
+      <div class="gold-separator flex-grow mx-8 mb-4"></div>
+      <span class="material-symbols-outlined text-primary">local_cafe</span>
     </div>
 
-    <div class="cat-note" style="margin-top:1.8rem">Tés e infusiones</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Tecito</div><div class="price">$69</div></div>
-      <div class="item"><div class="name">Tisana de Temporada</div><div class="price">$89</div></div>
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Cafés esenciales</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Espresso</h3><span class="font-label-md text-primary">$59</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Espresso Cortado</h3><span class="font-label-md text-primary">$69</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Espresso Doble</h3><span class="font-label-md text-primary">$69</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Americano</h3><span class="font-label-md text-primary">$69</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Flat White</h3><span class="font-label-md text-primary">$79</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Capuccino</h3><span class="font-label-md text-primary">$79</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Latte</h3><span class="font-label-md text-primary">$79</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Americano Cortado</h3><span class="font-label-md text-primary">$79</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Café de Olla</h3><span class="font-label-md text-primary">$49</span></div></article>
     </div>
 
-    <div class="cat-note" style="margin-top:1.8rem">Otros</div>
-    <div class="items cols2">
-      <div class="item"><div class="name">Soda Italiana</div><div class="price">$80</div></div>
-      <div class="item"><div class="name">Mojito de Frutos Rojos</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">Piñada</div><div class="price">$99</div></div>
-      <div class="item"><div class="name">San Pellegrino</div><div class="price">$50</div></div>
-      <div class="item"><div class="name">Refresco</div><div class="price">$55</div></div>
-      <div class="item"><div class="name">Soda Italiana de Lavanda</div><div class="price">$115</div><div class="desc">Con perlas explosivas.</div></div>
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Cafés especializados</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Red Velvet</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Caramel Machiato</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Latte Vainilla</h3><span class="font-label-md text-primary">$89</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Pumpkin Latte</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Affogato</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Café Bombón</h3><span class="font-label-md text-primary">$79</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Capuccino de Lavanda</h3><span class="font-label-md text-primary">$99</span></div></article>
+    </div>
+
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Sabores únicos</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Moccha</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Chai</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Chai Latte</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Matcha Latte</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Taro Latte</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Golden Milk</h3><span class="font-label-md text-primary">$89</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Pink Latte</h3><span class="font-label-md text-primary">$89</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Horchata Café</h3><span class="font-label-md text-primary">$99</span></div></article>
+    </div>
+
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Opciones frías</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Rick's Cold Brew</h3><span class="font-label-md text-primary text-lg">$89</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Chocolate Frío o Caliente</h3><span class="font-label-md text-primary text-lg">$89</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Mocha Frío</h3><span class="font-label-md text-primary text-lg">$99</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Matcha Frío</h3><span class="font-label-md text-primary text-lg">$99</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Frappuccino</h3><span class="font-label-md text-primary text-lg">$89</span></div><p class="font-body-md text-on-surface-variant italic">Oreo / Taro / Pumpkin / Red velvet.</p></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Frapé de Lichy con Lavanda</h3><span class="font-label-md text-primary text-lg">$129</span></div></article>
+    </div>
+
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Extras</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-lg text-on-surface">Leche de almendras y soya</h3><span class="font-label-md text-primary">$25</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-lg text-on-surface">Shot de leche entera ó deslactosada</h3><span class="font-label-md text-primary">$25</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-lg text-on-surface">Shot de leche de almendras</h3><span class="font-label-md text-primary">$55</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-lg text-on-surface">Taza de leche entera ó deslactosada</h3><span class="font-label-md text-primary">$45</span></div></article>
+    </div>
+  </section>
+
+  <!-- ===== BEBIDAS ===== -->
+  <section id="bebidas" class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24 scroll-mt-40">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h2 class="font-headline-lg text-primary mb-2">Bebidas</h2>
+        <p class="font-label-md text-on-surface-variant uppercase tracking-widest">Malteadas, tés y más</p>
+      </div>
+      <div class="gold-separator flex-grow mx-8 mb-4"></div>
+      <span class="material-symbols-outlined text-primary">local_bar</span>
+    </div>
+
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Malteadas y licuados</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Malteada</h3><span class="font-label-md text-primary text-lg">$99 <span class="q">(?)</span></span></div><p class="font-body-md text-on-surface-variant italic">De fresa, chocolate, vainilla ó cookies &amp; cream. Agrega topping +$35.</p></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Malteada Turín</h3><span class="font-label-md text-primary text-lg">$129</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Banana Split</h3><span class="font-label-md text-primary text-lg">$149</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Taro</h3><span class="font-label-md text-primary text-lg">$119</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Licuado de Plátano</h3><span class="font-label-md text-primary text-lg">$89</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Licuado de Fresa</h3><span class="font-label-md text-primary text-lg">$119</span></div></article>
+      <article class="dish"><div class="flex justify-between items-baseline mb-2 gap-3"><h3 class="font-headline-lg text-2xl text-on-surface">Smoothie Jais-Ice Berries</h3><span class="font-label-md text-primary text-lg">$109</span></div></article>
+    </div>
+
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Tés e infusiones</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Tecito</h3><span class="font-label-md text-primary">$69</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Tisana de Temporada</h3><span class="font-label-md text-primary">$89</span></div></article>
+    </div>
+
+    <p class="font-label-md text-primary uppercase tracking-[0.2em] mb-5">Otros</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Soda Italiana</h3><span class="font-label-md text-primary">$80</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Mojito de Frutos Rojos</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Piñada</h3><span class="font-label-md text-primary">$99</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">San Pellegrino</h3><span class="font-label-md text-primary">$50</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Refresco</h3><span class="font-label-md text-primary">$55</span></div></article>
+      <article class="dish !p-4"><div class="flex justify-between items-baseline gap-2"><h3 class="font-headline-lg text-xl text-on-surface">Soda Italiana de Lavanda</h3><span class="font-label-md text-primary">$115</span></div><p class="font-body-md text-on-surface-variant italic">Con perlas explosivas.</p></article>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-24">
+    <div class="plaque-border p-1">
+      <div class="plaque-inner bg-surface-container py-14 px-6 md:px-12 text-center">
+        <h2 class="font-display-lg text-display-lg text-on-surface mb-4 italic">¿Se te antojó algo?</h2>
+        <p class="max-w-xl mx-auto font-body-lg text-on-surface-variant mb-8">Mándanos tu pedido por WhatsApp y lo preparamos.</p>
+        <a href="https://wa.me/527773701417?text=%C2%A1Hola!%20Quiero%20pedir%3A%20" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-3 bg-primary text-on-primary px-10 py-5 font-label-md uppercase tracking-[0.15em] text-base transition-all hover:bg-primary-container">
+          <svg viewBox="0 0 32 32" class="w-5 h-5" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
+          Pedir por WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
 </main>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="wrap">
+<footer class="bg-surface-container-lowest border-t border-surface-container-highest">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-mobile md:px-margin-desktop py-16 max-w-container-max mx-auto">
     <div>
-      <div class="script">El Sazón de Tete</div>
-      <p style="opacity:.8;margin-top:.6rem">Cocina con sabor de casa, café de especialidad y postres artesanales en Cuernavaca.</p>
+      <div class="font-display-lg text-3xl text-primary mb-6">El Sazón de Tete</div>
+      <p class="font-body-md text-on-surface-variant max-w-xs">Cocina artesanal, café de especialidad y repostería hecha a mano en Cuernavaca, Morelos.</p>
     </div>
-    <div>
-      <h4>Contacto</h4>
-      <p><a href="tel:+527773701417">777 370 1417</a></p>
-      <p><a href="https://m.facebook.com/elsazondetetemx" target="_blank" rel="noopener">Facebook</a></p>
-      <p>Lomas de Cortés, Cuernavaca, Mor.</p>
+    <div class="flex flex-col space-y-3">
+      <span class="font-label-md text-primary uppercase mb-3">Explorar</span>
+      <a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="index.html">Inicio</a>
+      <a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="index.html#nosotros">Nosotros</a>
+      <a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="index.html#contacto">Contacto</a>
+      <a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="https://m.facebook.com/elsazondetetemx" target="_blank" rel="noopener">Facebook</a>
     </div>
-    <div>
-      <h4>Explorar</h4>
-      <p><a href="index.html">Inicio</a></p>
-      <p><a href="index.html#contacto">Cómo llegar</a></p>
+    <div class="flex flex-col space-y-4">
+      <span class="font-label-md text-primary uppercase">Pide por WhatsApp</span>
+      <p class="font-body-md text-on-surface-variant italic">Haz tu pedido o aparta tu mesa en un par de mensajes.</p>
+      <a href="https://wa.me/527773701417?text=%C2%A1Hola%20El%20Saz%C3%B3n%20de%20Tete!" target="_blank" rel="noopener"
+         class="inline-flex w-fit items-center gap-2 bg-primary text-on-primary px-6 py-3 font-label-md uppercase tracking-widest transition-all hover:bg-primary-container">
+        <svg viewBox="0 0 32 32" class="w-4 h-4" fill="currentColor"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
+        WhatsApp
+      </a>
     </div>
-    <small>© <span id="y"></span> El Sazón de Tete · Hecho con cariño en Cuernavaca, Morelos.</small>
+  </div>
+  <div class="px-margin-mobile md:px-margin-desktop py-8 border-t border-surface-container-highest flex justify-center items-center">
+    <p class="font-label-md text-on-surface-variant">© <span id="y"></span> El Sazón de Tete · Cuernavaca, Morelos.</p>
   </div>
 </footer>
 
 <!-- Botón flotante WhatsApp -->
-<a class="wa-float" aria-label="Escríbenos por WhatsApp" href="https://wa.me/527773701417?text=%C2%A1Hola%20El%20Saz%C3%B3n%20de%20Tete!" target="_blank" rel="noopener">
-  <svg viewBox="0 0 32 32" fill="#06301A"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
+<a href="https://wa.me/527773701417?text=%C2%A1Hola%20El%20Saz%C3%B3n%20de%20Tete!" target="_blank" rel="noopener" aria-label="WhatsApp"
+   class="fixed right-5 bottom-5 z-50 w-14 h-14 grid place-items-center bg-primary rounded-full shadow-2xl hover:scale-105 transition-transform">
+  <svg viewBox="0 0 32 32" class="w-7 h-7" fill="#3c2f00"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-2.1c1.8 1 3.9 1.5 5.9 1.5 7 0 12.6-5.6 12.6-12.6S23 3 16 3zm0 22.7c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.4 1.2 1.2-4.3-.3-.4a10 10 0 01-1.6-5.4c0-5.6 4.6-10.1 10.2-10.1S26.2 9.9 26.2 15.5 21.6 25.7 16 25.7zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.3-.7.1a8.2 8.2 0 01-2.4-1.5 9 9 0 01-1.7-2.1c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6s.1-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.5 3.8 6 5.3 2.1.9 2.9.9 3.9.8.6-.1 1.8-.7 2.1-1.5.3-.7.3-1.4.2-1.5z"/></svg>
 </a>
 
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('active'); });
+  }, {threshold:0.05});
+  document.querySelectorAll('main section, footer').forEach(s=>{ s.classList.add('scroll-reveal'); observer.observe(s); });
+  window.addEventListener('scroll', ()=>{
+    const h = document.querySelector('header');
+    if(window.scrollY > 50){ h.classList.add('shadow-2xl','py-2'); h.classList.remove('py-4'); }
+    else { h.classList.remove('shadow-2xl','py-2'); h.classList.add('py-4'); }
+  });
+</script>
 </body>
 </html>
